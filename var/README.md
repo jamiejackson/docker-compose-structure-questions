@@ -1,0 +1,1 @@
+This directory's contents wouldn't be in SCM (the sensitive files would be added manually).

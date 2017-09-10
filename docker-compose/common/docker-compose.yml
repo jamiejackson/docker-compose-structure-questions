@@ -1,0 +1,25 @@
+version: '3'
+services:
+
+  solr:
+    # todo: use a pre-built image
+    image: local/solr-mariadb:6.6.0${SOLR_CONTAINER_SUFFIX}
+    build:
+      context: ../../image
+    # container name will get overridden by env yml, anyway
+    container_name: solr${SOLR_CONTAINER_SUFFIX}
+    ports:
+      - "${SOLR_PUBLISH_PORT}:8983"
+    volumes:
+      - solr_data:/opt/solr/data
+    command: >
+      -a "
+      -Dcustom.dataimporter.datasource.driver=org.mariadb.jdbc.Driver
+      -Dcustom.dataimporter.datasource.url=jdbc:mysql://${DB_HOST}:3306/${DB_SCHEMA}
+      -Dcustom.dataimporter.datasource.user=${DB_USER}
+      -Dcustom.dataimporter.datasource.password=${DB_PASSWORD}
+      "
+    restart: unless-stopped
+    
+volumes:
+  solr_data:

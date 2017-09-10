@@ -1,0 +1,9 @@
+version: '3'
+services:
+
+  solr:
+    volumes:
+      - "../../image/cores:/opt/solr/server/solr/mycores"
+      # for local development, these aren't sensitive,
+      #  so they're in SCM
+      - "../localdev/encrypt.key:/opt/solr/credentials/encrypt.key"

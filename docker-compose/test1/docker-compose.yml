@@ -1,0 +1,13 @@
+version: '3'
+services:
+
+  solr:
+   # on servers, this is pulled from a file outside of scm
+    env_file:
+      - ../../../var/.env
+    
+    # on servers, this is pulled from a file outside of scm
+    volumes:
+      - "../../var/encryptKey.txt:/opt/solr/credentials/encryptKey.txt"
+      
+ 
